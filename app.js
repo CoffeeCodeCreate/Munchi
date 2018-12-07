@@ -34,6 +34,7 @@ app.get("/restaurants/new", function(req,res){
 
 app.post("/restaurants", function(req,res){
     console.log(req.body);
+    console.log(req);
     var name = req.body.name;
     var image = req.body.image;
     var specialty = req.body.specialty;
@@ -53,10 +54,14 @@ app.post("/restaurants", function(req,res){
         }
         else
         {
+            console.log(newEntry);
             res.redirect("/restaurants");
         }
     });
 });
+
+
+//Show page
 
 
 
