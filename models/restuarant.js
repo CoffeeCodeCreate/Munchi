@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 
 var restaurantSchema = new mongoose.Schema({
     name: String,
+    image: String,
     spectialty: String,
     description: String,
     bestSellers: 

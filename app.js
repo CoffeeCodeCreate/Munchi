@@ -28,7 +28,9 @@ app.get("/restaurants", function(req,res){
     })
 });
 
-
+app.get("/restaurants/new", function(req,res){
+    res.render("new");
+})
 
 
 
