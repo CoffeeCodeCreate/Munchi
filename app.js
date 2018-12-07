@@ -32,6 +32,32 @@ app.get("/restaurants/new", function(req,res){
     res.render("new");
 })
 
+app.post("/restaurants", function(req,res){
+    console.log(req.body);
+    var name = req.body.name;
+    var image = req.body.image;
+    var specialty = req.body.specialty;
+    var description = req.body.description;
+
+    var newRestaurant = {
+        name: name,
+        image: image,
+        specialty: specialty,
+        description: description
+    };
+
+    Restaurant.create(newRestaurant, function(err, newEntry){
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            res.redirect("/restaurants");
+        }
+    });
+});
+
 
 
 app.listen(3000, function(){
