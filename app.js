@@ -1,5 +1,6 @@
 var express     = require('express'),
 app             = express(),
+methodOverride = require("method-override"),
 bodyParser      = require("body-parser"),
 mongoose        = require("mongoose"),
 //MongoDB / Mongoose modules
@@ -7,6 +8,9 @@ Restaurant = require("./models/restuarant");
 
 mongoose.connect("mongodb://localhost/munchi_v1");
 app.use(bodyParser.urlencoded({extended: true}));
+
+// Tells express to use the method-override package and what to look for in the URL
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
 
@@ -62,8 +66,35 @@ app.post("/restaurants", function(req,res){
 
 
 //Show page
+app.get("/restaurants/:id", function(req,res){
+    //Find restaurant based on its ID
+    Restaurant.findById(req.params.id).exec( function(err, foundRestaurant){
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            //render the show template for this url, send the model data to the template.
+            res.render("show", {restaurant: foundRestaurant});
+        }
+    });
+});
 
-
+//Delete route
+app.delete("/restaurants/:id", function(req, res){
+    //destroy post
+    Restaurant.findByIdAndRemove(req.params.id, function(err){
+        if(err)
+        {
+            console.log(err)
+        }
+        else
+        {
+            res.redirect("/restaurants");
+        }
+    });
+});
 
 app.listen(3000, function(){
     console.log("app running....");
