@@ -1,6 +1,6 @@
 //importing modules needed
 var mongoose    = require('mongoose'),
-    Restaurant  = require("./models/restuarant"),
+    Restaurant  = require("./models/restaurant"),
     Comment     = require("./models/comment");
 
 //Dummy restaurants used to seed the mongo DB.
