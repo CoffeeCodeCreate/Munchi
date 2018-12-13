@@ -1,4 +1,14 @@
 <% include ../partials/header %>
 
+<h1>Add a new comment</h1>
+<form action="/restaurants/<%= restaurant._id %>/comments" method="POST">
+    <!-- 
+    Here an object called 'comment' is created so we can retrieve its attributes from the body of the request
+    -->
+    <input type="text" name="comment[text]" placeholder="text">
+    <input type="text" name="comment[author]" placeholder="author">
+    <button>Submit</button>
+</form>
+<a href="/restaurants">Go back</a>
 
 <%include ../partials/footer %>

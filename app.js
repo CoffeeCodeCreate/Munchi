@@ -5,6 +5,7 @@ bodyParser      = require("body-parser"),
 mongoose        = require("mongoose"),
 //MongoDB / Mongoose modules
 Restaurant = require("./models/restaurant");
+Comment = require("./models/comment");
 
 seedDB = require("./seeds");
 
@@ -79,7 +80,7 @@ app.get("/restaurants/:id", function(req,res){
         else
         {
             //render the show template for this url, send the model data to the template.
-            res.render("restaurans/show", {restaurant: foundRestaurant});
+            res.render("restaurants/show", {restaurant: foundRestaurant});
         }
     });
 });
@@ -113,6 +114,35 @@ app.get("/restaurants/:id/comments/new", function(req,res){
         {
             //render this page, pass the restaurant object as 'restaurant'
             res.render("comments/new", {restaurant: restaurant});
+        }
+    });
+});
+
+app.post("/restaurants/:id/comments", function(req,res){
+    //Look up restaurant based on ID
+    Restaurant.findById(req.params.id, function(err, restaurant){
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            // The comment object is passed as a schema for the Comment DB model.
+            Comment.create(req.body.comment, function(err, comment){
+                if(err)
+                {
+                    console.log(err);
+                }
+                else
+                {
+                    //Push the comment into the restaurant 'comment' attribute
+                    restaurant.comments.push(comment);
+                    //Save all changes
+                    restaurant.save();
+                    //redirect
+                    res.redirect("/restaurants/" + restaurant._id);
+                }
+            });
         }
     });
 });

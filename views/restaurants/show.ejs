@@ -11,6 +11,8 @@
         <button>Delete</button>
     </form>
 
+    <a href="/restaurants/<%= restaurant._id %>/comments/new">Add a new comment</a>
+
     <hr>
     <% restaurant.comments.forEach(function(comment){ %>
         <p>
