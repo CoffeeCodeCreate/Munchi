@@ -26,21 +26,6 @@ var indexRoutes = require("./routes/index");
 var commentRoutes = require("./routes/comments");
 var restaurantRoutes = require("./routes/restaurants");
 
-//Delete route
-app.delete("/restaurants/:id", function(req, res){
-    //destroy post
-    Restaurant.findByIdAndRemove(req.params.id, function(err){
-        if(err)
-        {
-            console.log(err)
-        }
-        else
-        {
-            res.redirect("/restaurants");
-        }
-    });
-});
-
 
 /**
  * Modularized the routes.
