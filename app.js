@@ -19,72 +19,12 @@ app.set("view engine", "ejs");
 seedDB();
 
 
-app.get("/", function(req,res){
-    res.render("landing");
-});
-
-app.get("/restaurants", function(req,res){
-    //Get all restaurants from MongoDB database
-    Restaurant.find({}, function(err, allRestaurants){
-        if(err)
-        {
-            console.log(err);
-        }
-        else
-        {
-            res.render("restaurants/index", {restaurants: allRestaurants});
-        }
-    })
-});
-
-app.get("/restaurants/new", function(req,res){
-    res.render("restaurants/new");
-})
-
-app.post("/restaurants", function(req,res){
-    console.log(req.body);
-    console.log(req);
-    var name = req.body.name;
-    var image = req.body.image;
-    var specialty = req.body.specialty;
-    var description = req.body.description;
-
-    var newRestaurant = {
-        name: name,
-        image: image,
-        specialty: specialty,
-        description: description
-    };
-
-    Restaurant.create(newRestaurant, function(err, newEntry){
-        if(err)
-        {
-            console.log(err);
-        }
-        else
-        {
-            console.log(newEntry);
-            res.redirect("/restaurants");
-        }
-    });
-});
-
-
-//Show page
-app.get("/restaurants/:id", function(req,res){
-    //Find restaurant based on its ID
-    Restaurant.findById(req.params.id).populate("comments").exec( function(err, foundRestaurant){
-        if(err)
-        {
-            console.log(err);
-        }
-        else
-        {
-            //render the show template for this url, send the model data to the template.
-            res.render("restaurants/show", {restaurant: foundRestaurant});
-        }
-    });
-});
+/**
+ * ROUTES TO THE PAGES
+ */
+var indexRoutes = require("./routes/index");
+var commentRoutes = require("./routes/comments");
+var restaurantRoutes = require("./routes/restaurants");
 
 //Delete route
 app.delete("/restaurants/:id", function(req, res){
@@ -101,52 +41,29 @@ app.delete("/restaurants/:id", function(req, res){
     });
 });
 
-// Comment Routes
 
-app.get("/restaurants/:id/comments/new", function(req,res){
-    //Find restaurant by ID
-    Restaurant.findById(req.params.id, function(err, restaurant){
-        if(err)
-        {
-            console.log(err);
-        }
+/**
+ * Modularized the routes.
+ * 
+ * Now instead of having to declare the routes and all their functionality here,
+ * app.use() allows us to declare all that functionality in another file
+ * which will be used once the respective route is requested.
+ * 
+ * Example: All the functionality needed for the index route '/' is in a separate file in a seperate
+ * folder.
+ * 
+ * Also, all the routes' respective files will have their own declared routes that are relative to
+ * the current route.
+ * 
+ * For example, the "/" route in the restaurants.js file is the "/restaurant" route.
+ * 
+ * Think of it as "/restaurants" being prefixed to the "/new" route in the restaurants.js
+ * file.
+ */
 
-        else
-        {
-            //render this page, pass the restaurant object as 'restaurant'
-            res.render("comments/new", {restaurant: restaurant});
-        }
-    });
-});
-
-app.post("/restaurants/:id/comments", function(req,res){
-    //Look up restaurant based on ID
-    Restaurant.findById(req.params.id, function(err, restaurant){
-        if(err)
-        {
-            console.log(err);
-        }
-        else
-        {
-            // The comment object is passed as a schema for the Comment DB model.
-            Comment.create(req.body.comment, function(err, comment){
-                if(err)
-                {
-                    console.log(err);
-                }
-                else
-                {
-                    //Push the comment into the restaurant 'comment' attribute
-                    restaurant.comments.push(comment);
-                    //Save all changes
-                    restaurant.save();
-                    //redirect
-                    res.redirect("/restaurants/" + restaurant._id);
-                }
-            });
-        }
-    });
-});
+app.use("/", indexRoutes);
+app.use("/restaurants", restaurantRoutes);
+app.use("/restaurants/:id/comments", commentRoutes);
 
 app.listen(3000, function(){
     console.log("app running....");
