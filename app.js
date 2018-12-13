@@ -11,6 +11,7 @@ seedDB = require("./seeds");
 
 mongoose.connect("mongodb://localhost/munchi_v1");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + "/public"));
 
 // Tells express to use the method-override package and what to look for in the URL
 app.use(methodOverride("_method"));
@@ -19,7 +20,7 @@ seedDB();
 
 
 app.get("/", function(req,res){
-    res.send("<h1>Im working!</h1>");
+    res.render("landing");
 });
 
 app.get("/restaurants", function(req,res){
