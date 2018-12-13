@@ -79,7 +79,7 @@ app.get("/restaurants/:id", function(req,res){
         else
         {
             //render the show template for this url, send the model data to the template.
-            res.render("show", {restaurant: foundRestaurant});
+            res.render("restaurans/show", {restaurant: foundRestaurant});
         }
     });
 });
