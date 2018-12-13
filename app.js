@@ -6,12 +6,15 @@ mongoose        = require("mongoose"),
 //MongoDB / Mongoose modules
 Restaurant = require("./models/restuarant");
 
+seedDB = require("./seeds");
+
 mongoose.connect("mongodb://localhost/munchi_v1");
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Tells express to use the method-override package and what to look for in the URL
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
+seedDB();
 
 
 app.get("/", function(req,res){
@@ -68,7 +71,7 @@ app.post("/restaurants", function(req,res){
 //Show page
 app.get("/restaurants/:id", function(req,res){
     //Find restaurant based on its ID
-    Restaurant.findById(req.params.id).exec( function(err, foundRestaurant){
+    Restaurant.findById(req.params.id).populate("comments").exec( function(err, foundRestaurant){
         if(err)
         {
             console.log(err);
