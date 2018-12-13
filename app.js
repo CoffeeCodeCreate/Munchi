@@ -30,13 +30,13 @@ app.get("/restaurants", function(req,res){
         }
         else
         {
-            res.render("index", {restaurants: allRestaurants});
+            res.render("restaurants/index", {restaurants: allRestaurants});
         }
     })
 });
 
 app.get("/restaurants/new", function(req,res){
-    res.render("new");
+    res.render("restaurants/new");
 })
 
 app.post("/restaurants", function(req,res){
@@ -95,6 +95,24 @@ app.delete("/restaurants/:id", function(req, res){
         else
         {
             res.redirect("/restaurants");
+        }
+    });
+});
+
+// Comment Routes
+
+app.get("/restaurants/:id/comments/new", function(req,res){
+    //Find restaurant by ID
+    Restaurant.findById(req.params.id, function(err, restaurant){
+        if(err)
+        {
+            console.log(err);
+        }
+
+        else
+        {
+            //render this page, pass the restaurant object as 'restaurant'
+            res.render("comments/new", {restaurant: restaurant});
         }
     });
 });
