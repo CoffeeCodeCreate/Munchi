@@ -30,12 +30,17 @@ router.post("/", function(req, res){
     var image = req.body.image;
     var specialty = req.body.specialty;
     var description = req.body.description;
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    }
 
     var newRestaurant = {
         name: name,
         image: image,
         specialty: specialty,
-        description: description
+        description: description,
+        author: author
     };
 
     Restaurant.create(newRestaurant, function(err, newEntry){

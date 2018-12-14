@@ -5,6 +5,17 @@ var restaurantSchema = new mongoose.Schema({
     image: String,
     spectialty: String,
     description: String,
+    author:
+    {
+        id:
+        {
+            //reference to the user model's id: '._id'
+            type: mongoose.Schema.Types.ObjectId,
+            //the model to refer to
+            ref: "User"
+        },
+        username: String
+    },
     bestSellers: 
         [
             {
