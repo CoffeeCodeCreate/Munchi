@@ -4,7 +4,7 @@ methodOverride = require("method-override"),
 bodyParser      = require("body-parser"),
 mongoose        = require("mongoose"),
 //MongoDB / Mongoose modules
-Restaurant = require("./models/restaurant");
+Restaurant = require("./models/restaurant"),
 Comment = require("./models/comment");
 
 seedDB = require("./seeds");
