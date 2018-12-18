@@ -5,7 +5,8 @@ bodyParser      = require("body-parser"),
 mongoose        = require("mongoose"),
 passport        = require("passport"),
 LocalStrategy   = require("passport-local");
-//MongoDB / Mongoose modules
+
+//MongoDB / Mongoose models
 Restaurant      = require("./models/restaurant"),
 Comment         = require("./models/comment"),
 User            = require("./models/user");
