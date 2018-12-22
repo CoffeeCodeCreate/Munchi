@@ -35,6 +35,7 @@ router.post("/register", function(req,res){
 
         //if all is authenticated, redirect.
         passport.authenticate("local")(req, res, function(){
+            console.log(user._id);
             res.redirect("/restaurants");
         });
     });
