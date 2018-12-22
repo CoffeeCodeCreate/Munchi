@@ -72,6 +72,12 @@ seedDB();
 */
 app.use(function(req, res, next){
     //Whatever we put here is available in all our templates
+    
+    /**
+     * Here the variable 'currentUser' is passed to all ejs templates through the response.locals object.
+     * 
+     * This variable will be used to check whether or not the user is logged in.u
+     */
     res.locals.currentUser = req.user;
     //runs the next middleware.
     next();
