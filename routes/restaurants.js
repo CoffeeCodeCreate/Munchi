@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var Restaurant = require("../models/restaurant");
 
-//index route: Show all restaurants
+/**
+ * 
+ *  index route: Show all restaurants 
+ */
 router.get("/", function(req, res){
     Restaurant.find({}, function(err, allRestaurants){
         if(err)
@@ -17,12 +20,18 @@ router.get("/", function(req, res){
     });
 });
 
-//New route: Show a form to add a new restaurant.
+/**
+ * 
+ *  New route: Show a form to add a new restaurant. 
+ */
+
 router.get("/new", function(req,res){
     res.render("restaurants/new");
 });
 
-//Create route: Add a new restaurant into the DB
+/**
+ * Create route: Add a new restaurant into the DB
+ *  */
 router.post("/", function(req, res){
     console.log(req.body);
     console.log(req);
@@ -56,9 +65,13 @@ router.post("/", function(req, res){
     });
 });
 
+router.put("/:id",middleware.check)
 
+/**
+ * SHOW PAGE
+ */
 router.get("/:id", function(req,res){
-    //Find restaurant based on its ID
+    //Find restaurant based on its ID, populate with comments.
     Restaurant.findById(req.params.id).populate("comments").exec( function(err, foundRestaurant){
         if(err)
         {
