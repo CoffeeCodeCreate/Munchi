@@ -10,7 +10,7 @@ var Comment = require("../models/comment");
 
 //middleware functions
 //note: It automatically retrieves the index.js file in this folder.
-var middleware = require("../middleware");
+var middleware = require("../middleware/");
 
 // Comment Routes
 /**

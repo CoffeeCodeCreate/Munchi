@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var Restaurant = require("../models/restaurant");
+var middleware = require("../middleware");
 
 /**
- * 
  *  index route: Show all restaurants 
  */
 router.get("/", function(req, res){
+    //retrieve all restaurants from the database.
     Restaurant.find({}, function(err, allRestaurants){
         if(err)
         {
@@ -25,14 +26,14 @@ router.get("/", function(req, res){
  *  New route: Show a form to add a new restaurant. 
  */
 
-router.get("/new", function(req,res){
+router.get("/new", middleware.isLoggedIn, function(req,res){
     res.render("restaurants/new");
 });
 
 /**
- * Create route: Add a new restaurant into the DB
+ * CREATE route: Add a new restaurant into the DB
  *  */
-router.post("/", function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
     console.log(req.body);
     console.log(req);
     var name = req.body.name;
@@ -65,14 +66,46 @@ router.post("/", function(req, res){
     });
 });
 
-router.put("/:id",middleware.check)
+//UPDATE route
+router.put("/:id",middleware.checkRestaurantOwnership, function(req,res){
+
+    //Find and update the correct restaurant based on its ID
+    Restaurant.findByIdAndUpdate(req.params.id, req.body.restaurant, function(err, updatedRestaurant){
+        if(err)
+        {
+            res.redirect("/restaurants");
+        }
+
+        else
+        {
+            res.redirect("/restaurants/" + req.params.id);
+        }
+    });
+});
+
+//DESTROY route
+router.delete("/:id", middleware.checkRestaurantOwnership, function(req,res){
+    Restaurant.findByIdAndRemove(req.params.id, function(err){
+        /**
+         * Fix this code, use only one redirect in the next version!
+         */
+        if(err)
+        {
+            res.redirect("/restaurants");
+        }
+        else
+        {
+            res.redirect("/restaurants");
+        }
+    });
+});
 
 /**
  * SHOW PAGE
  */
 router.get("/:id", function(req,res){
-    //Find restaurant based on its ID, populate with comments.
-    Restaurant.findById(req.params.id).populate("comments").exec( function(err, foundRestaurant){
+    //Find restaurant based on its ID, populate/fill with their respective comments.
+    Restaurant.findById(req.params.id).populate("comments").exec(function(err, foundRestaurant){
         if(err)
         {
             console.log(err);

@@ -1,4 +1,4 @@
-var Restaurant = require("../modles/restaurant");
+var Restaurant = require("../models/restaurant");
 var Comments = require("../models/comment");
 
 // Initializing middleware object.
@@ -87,4 +87,4 @@ var middlewareObj = {};
  }
 
 
- module.exports - middlewareObj;
+ module.exports = middlewareObj;

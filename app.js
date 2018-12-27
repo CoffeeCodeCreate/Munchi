@@ -13,6 +13,13 @@ User            = require("./models/user");
 
 seedDB = require("./seeds");
 
+/**
+ * ROUTES TO THE PAGES
+ */
+var indexRoutes = require("./routes/index");
+var commentRoutes = require("./routes/comments");
+var restaurantRoutes = require("./routes/restaurants");
+
 mongoose.connect("mongodb://localhost/munchi_v1");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -84,12 +91,6 @@ app.use(function(req, res, next){
  });
 
 
-/**
- * ROUTES TO THE PAGES
- */
-var indexRoutes = require("./routes/index");
-var commentRoutes = require("./routes/comments");
-var restaurantRoutes = require("./routes/restaurants");
 
 
 /**
