@@ -32,6 +32,7 @@ router.get("/new", middleware.isLoggedIn, function(req,res){
     });
 });
 
+//CREATE comment route
 router.post("/", middleware.isLoggedIn, function(req,res){
     //Look up restaurant based on ID
     Restaurant.findById(req.params.id, function(err, restaurant){

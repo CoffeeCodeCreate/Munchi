@@ -5,7 +5,17 @@ var mongoose = require('mongoose');
 var commentSchema = mongoose.Schema({
     //The data the schema will hold
     text: String,
-    author: String
+    author:
+    {
+        id:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+        //the model referred to
+            ref: "User"
+        },
+        //String of the current user.
+        username: String
+    }
 });
 
 //Exporting this mongoose model as a module.
