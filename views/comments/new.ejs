@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<h1>Add a new comment to <%= campground.name %></h1>
+<h1>Add a new comment to <%= restaurant.name %></h1>
 <form action="/restaurants/<%= restaurant._id %>/comments" method="POST">
     <!-- 
     Here an object called 'comment' is created so we can retrieve its attributes from the body of the request

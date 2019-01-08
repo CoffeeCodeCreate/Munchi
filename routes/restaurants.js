@@ -66,6 +66,12 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     });
 });
 
+router.get("/:id/edit", middleware.checkRestaurantOwnership, function(req, res){
+    Restaurant.findById(req.params.id, function(err, foundRestaurant){
+        res.render("restaurants/edit", {restaurant: foundRestaurant});
+    });
+});
+
 //UPDATE route
 router.put("/:id",middleware.checkRestaurantOwnership, function(req,res){
 

@@ -15,7 +15,7 @@ var middlewareObj = {};
  middlewareObj.checkRestaurantOwnership = function(req,res,next)
  {
      //if the user is logged in.
-     if(req.Authenticated())
+     if(req.isAuthenticated())
      {
          Restaurant.findById(req.params.id, function(err, foundRestaurant){
             if(err)

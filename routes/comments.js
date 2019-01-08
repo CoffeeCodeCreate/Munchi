@@ -42,7 +42,9 @@ router.post("/", middleware.isLoggedIn, function(req,res){
         }
         else
         {
-            // The comment object is passed as a schema for the Comment DB model.
+            /**
+             * The comment object from the request is used as the schemal for our mongodb model.
+             */
             Comment.create(req.body.comment, function(err, comment){
                 if(err)
                 {
@@ -50,6 +52,11 @@ router.post("/", middleware.isLoggedIn, function(req,res){
                 }
                 else
                 {
+                    //Add username and ID to comment
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    //Saving all changes done to the comment
+                    comment.save();
                     //Push the comment into the restaurant 'comment' attribute
                     restaurant.comments.push(comment);
                     //Save all changes
@@ -64,20 +71,33 @@ router.post("/", middleware.isLoggedIn, function(req,res){
 
 //comment edit
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req,res){
-    Comment.findById(req.params.comment_id, function(err, foundComment){
-        if(err)
+
+        //Check and makre sure the restaurant exists
+        Restaurant.findById(req.params.id, function(err, foundRestaurant){
+        if(err || !foundRestaurant)
         {
-            res.redirect("back");
+            return res.redirect("back");
         }
 
-        else
-        {
+        //Find the comment
+        Comment.findById(req.params.comment_id, function(err, foundComment)
+        {  
+            if(err)
+            {
+                //redirect to the previous page
+                red.redirect("back");
+            }
+            
+            
+            else
+            {
             /**
              * Send the restaurant ID and the comment object to the edit form from req.body
              */
 
             res.render("comments/edit", {restaurant_id: req.params.id, comment: foundComment});
-        }
+            }
+        });
     });
 });
 

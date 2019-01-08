@@ -7,7 +7,7 @@
     <h3>Description: <%= restaurant.description %></h3>
 
 
-    <% if(currentUser && currentUser._id.equals(restaurant.author.id)){ %>
+    <% if(currentUser && currentUser._id.equals((restaurant.author.id))){ %>
         <a class="btn btn-xs btn-warning" href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
         <form id="delete-form" action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
             <button class="btn btn-xs btn-danger">Delete</button>
@@ -19,14 +19,13 @@
     <hr>
     <% restaurant.comments.forEach(function(comment){ %>
         <p>
-            <strong><%= comment.author %></strong> - <%= comment.text %>
+            <strong><%= comment.author.username %></strong> - <%= comment.text %>
         </p>
 
-        <% if(currentUser && comment.author.id == (currentUser._id)){ %>
-            <a class="btn btn-xs btn-warning" 
-               href="/campgrounds/<%=campground._id %>/comments/<%=comment._id %>/edit">Edit</a>
-            <form id="delete-form" action="/campgrounds/<%=campground._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
-                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+        <% if(currentUser && comment.author.id.equals((currentUser._id))){ %>
+            <a href="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>/edit">Edit</a>
+            <form id="delete-form" action="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete">
             </form>
         <% } %>
     <% }); %>
