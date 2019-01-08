@@ -102,7 +102,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req,r
 });
 
 //comment UPDATE route via PUT request
-router.put(":/comment_id",middleware.checkCommentOwnership, function(req,res){
+router.put("/:comment_id",middleware.checkCommentOwnership, function(req,res){
     /**
      * Find the comment via the comment's id and then edit it.
      */
@@ -114,7 +114,7 @@ router.put(":/comment_id",middleware.checkCommentOwnership, function(req,res){
         else
         {
             //redirect back to the restaurant based on ID
-            res.redirect("/restuarants/" + req.params.id);
+            res.redirect("/restaurants/" + req.params.id);
         }
     });
 });

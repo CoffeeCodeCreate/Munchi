@@ -46,7 +46,7 @@ var middlewareObj = {};
  {
      if(req.isAuthenticated())
      {
-         Comment.findById(req.params.comment.id, function(err, foundComment){
+         Comment.findById(req.params.comment_id, function(err, foundComment){
             if(err)
             {
                 //redirect back to the main restaurants page
