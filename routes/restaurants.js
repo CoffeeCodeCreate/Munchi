@@ -114,6 +114,7 @@ router.get("/:id", function(req,res){
     Restaurant.findById(req.params.id).populate("comments").exec(function(err, foundRestaurant){
         if(err || !foundRestaurant)
         {
+            req.flash("error", "Restaurant not found!");
             res.redirect("back");
         }
         else

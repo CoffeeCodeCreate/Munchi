@@ -48,6 +48,7 @@ router.post("/", middleware.isLoggedIn, function(req,res){
             Comment.create(req.body.comment, function(err, comment){
                 if(err)
                 {
+                    req.flash("error", "Something went wrong!");
                     console.log(err);
                 }
                 else
@@ -61,6 +62,7 @@ router.post("/", middleware.isLoggedIn, function(req,res){
                     restaurant.comments.push(comment);
                     //Save all changes
                     restaurant.save();
+                    req.flash("success", "Successfully added comment");
                     //redirect
                     res.redirect("/restaurants/" + restaurant._id);
                 }
@@ -76,6 +78,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req,r
         Restaurant.findById(req.params.id, function(err, foundRestaurant){
         if(err || !foundRestaurant)
         {
+            req.flash("error", "No Restaurant found!");
             return res.redirect("back");
         }
 
@@ -129,6 +132,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req,res
         }
         else
         {
+            req.flash("success", "Comment deleted");
             //redirect back the show page of the restaurant based on ID
             res.redirect("/restaurants/" + req.params.id);
         }

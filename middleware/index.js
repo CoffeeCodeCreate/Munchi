@@ -18,8 +18,9 @@ var middlewareObj = {};
      if(req.isAuthenticated())
      {
          Restaurant.findById(req.params.id, function(err, foundRestaurant){
-            if(err)
+            if(err || !foundRestaurant)
             {
+                req.flash("error","Restaurant not found");
                 res.redirect("/restaurants");
             }
 
@@ -34,10 +35,16 @@ var middlewareObj = {};
                 else
                 {
                     //take user back to the previous page
+                    req.flash("error", "You don't have permission to do that.");
                     res.redirect("back");
                 }
             }
          });
+     }
+    else
+     {
+         req.flash("error", "You need to be logged in to do that.");
+         res.redirect("back");
      }
  }
 
@@ -47,8 +54,9 @@ var middlewareObj = {};
      if(req.isAuthenticated())
      {
          Comment.findById(req.params.comment_id, function(err, foundComment){
-            if(err)
+            if(err || !foundComment)
             {
+                req.flash("error", "Comment not found!");
                 //redirect back to the main restaurants page
                 res.redirect("/restaurants");
             }
@@ -68,12 +76,19 @@ var middlewareObj = {};
                 // If the logged in user is not the author of the comment, redirect them back a page.
                  else
                  {
-                     res.redirect("back");
+                    req.flash("error","You dont have permission to do that!");
+                    res.redirect("back");
                  }
 
             }
          });
      }
+     //If theyre not logged in
+    else
+    {
+        req.flash("error", "You need to be logged in to do that");
+        res.redirect("back");
+    }
  }
 
 
@@ -83,8 +98,8 @@ var middlewareObj = {};
      {
          return next();
      }
+     req.flash("error","You need to be logged in.");
      res.redirect("/login");
  }
-
 
  module.exports = middlewareObj;

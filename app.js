@@ -4,6 +4,7 @@ methodOverride = require("method-override"),
 bodyParser      = require("body-parser"),
 mongoose        = require("mongoose"),
 passport        = require("passport"),
+flash           = require("connect-flash");
 LocalStrategy   = require("passport-local");
 
 //MongoDB / Mongoose models
@@ -27,6 +28,8 @@ app.use(express.static(__dirname + "/public"));
 // Tells express to use the method-override package and what to look for in the URL
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
+//Use the connect-flash package
+app.use(flash());
 
 //Seeds the database
 // seedDB();
@@ -86,6 +89,11 @@ app.use(function(req, res, next){
      * This variable will be used to check whether or not the user is logged in.u
      */
     res.locals.currentUser = req.user;
+
+    //Pass the flash messages to every template
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    
     //runs the next middleware.
     next();
  });

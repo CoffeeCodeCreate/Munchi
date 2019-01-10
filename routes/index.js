@@ -29,13 +29,13 @@ router.post("/register", function(req,res){
     User.register(newUser, req.body.password, function(err,user){
         if(err)
         {
-            console.log(err);
+            req.flash("error", err.message);
             return res.render("register");
         }
 
         //if all is authenticated, redirect.
         passport.authenticate("local")(req, res, function(){
-            console.log(user._id);
+            req.flash("success", "Welcome to Munchi " + user.username);
             res.redirect("/restaurants");
         });
     });
@@ -63,7 +63,7 @@ router.post("/login", passport.authenticate("local",
 router.get("/logout",function(req,res){
     //terminates a login session
     req.logout();
-    console.log("User is logged out!");
+    req.flash("success", "You have been logged out");
     res.redirect("/restaurants");
 });
 
