@@ -29,7 +29,7 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
 //Seeds the database
-seedDB();
+// seedDB();
 
 /**
  * Session config for mongoose.
