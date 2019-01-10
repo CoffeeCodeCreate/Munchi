@@ -130,7 +130,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req,res
         else
         {
             //redirect back the show page of the restaurant based on ID
-            res.redirect("/restaurants/" , req.params.id);
+            res.redirect("/restaurants/" + req.params.id);
         }
     });
 });

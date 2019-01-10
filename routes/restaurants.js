@@ -16,7 +16,7 @@ router.get("/", function(req, res){
 
         else
         {
-            res.render("restaurants/index", {restaurants: allRestaurants});
+            res.render("restaurants/index", {restaurants: allRestaurants, currentUser: req.user});
         }
     });
 });
@@ -112,9 +112,9 @@ router.delete("/:id", middleware.checkRestaurantOwnership, function(req,res){
 router.get("/:id", function(req,res){
     //Find restaurant based on its ID, populate/fill with their respective comments.
     Restaurant.findById(req.params.id).populate("comments").exec(function(err, foundRestaurant){
-        if(err)
+        if(err || !foundRestaurant)
         {
-            console.log(err);
+            res.redirect("back");
         }
         else
         {

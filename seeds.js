@@ -39,38 +39,38 @@ function seedDB()
         console.log("removed all restaurants from the DB");
     });
 
-    data.forEach(function(seed){
-        Restaurant.create(seed, function(err, restaurant){
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                console.log("Added a restaurant");
-                //Add a comment to the restaurant
-                Comment.create(
-                    {
-                        text: "This place sucks",
-                        author: "Bill"
-                    },
-                    function(err, comment)
-                    {
-                        if(err)
-                        {
-                            console.log(err);
-                        }
-                        else
-                        {
-                            restaurant.comments.push(comment);
-                            restaurant.save();
-                            console.log("Created a new comment!");
-                        }
-                    }
-                )
-            }
-        });
-    });
+    // data.forEach(function(seed){
+    //     Restaurant.create(seed, function(err, restaurant){
+    //         if(err)
+    //         {
+    //             console.log(err);
+    //         }
+    //         else
+    //         {
+    //             console.log("Added a restaurant");
+    //             //Add a comment to the restaurant
+    //             Comment.create(
+    //                 {
+    //                     text: "This place sucks",
+    //                     author: "Bill"
+    //                 },
+    //                 function(err, comment)
+    //                 {
+    //                     if(err)
+    //                     {
+    //                         console.log(err);
+    //                     }
+    //                     else
+    //                     {
+    //                         restaurant.comments.push(comment);
+    //                         restaurant.save();
+    //                         console.log("Created a new comment!");
+    //                     }
+    //                 }
+    //             )
+    //         }
+    //     });
+    // });
 }
 
 module.exports = seedDB;

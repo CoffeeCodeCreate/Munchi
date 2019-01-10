@@ -1,5 +1,6 @@
 <% include ../partials/header %>
 
+<% console.log('From the show page: ' + currentUser) %>
 
     <h1><%= restaurant.name %></h1>
     <img src="<%= restaurant.image %>" >
@@ -7,7 +8,7 @@
     <h3>Description: <%= restaurant.description %></h3>
 
 
-    <% if(currentUser && currentUser._id.equals((restaurant.author.id))){ %>
+    <% if(currentUser && restaurant.author.id.equals(currentUser._id)){ %>
         <a class="btn btn-xs btn-warning" href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
         <form id="delete-form" action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
             <button class="btn btn-xs btn-danger">Delete</button>
@@ -22,13 +23,13 @@
             <strong><%= comment.author.username %></strong> - <%= comment.text %>
         </p>
 
-        <% if(currentUser && comment.author.id.equals((currentUser._id))){ %>
+        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
             <a href="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>/edit">Edit</a>
             <form id="delete-form" action="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete">
+                <button>Delete</button>
             </form>
         <% } %>
-    <% }); %>
+    <% }) %>
 
 
 
