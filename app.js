@@ -12,7 +12,8 @@ Restaurant      = require("./models/restaurant"),
 Comment         = require("./models/comment"),
 User            = require("./models/user");
 
-seedDB = require("./seeds");
+// seedDB = require("./seeds");
+// seedDB();
 
 /**
  * ROUTES TO THE PAGES
