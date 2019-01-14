@@ -1,0 +1,3 @@
+Functionality ideas:
+
+- Add location to the restaurant pages.
