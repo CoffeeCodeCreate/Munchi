@@ -1,9 +1,14 @@
-<% include ./partials/header %>
+<% include ./partials/landingHeader %>
 <div id="landingContainer">
-    <h1>Welcome to Munchi</h1>
+    <div id="overlay"></div>
+    <div id="headerContainer">
+        <h1 id="firstLandingHeader">Welcome to</h1>
+        <h1 id="secondLandingHeader">Munchi</h1>
 
-    <a href="/restaurants">Check out our restaurants</a>
-
+        <button onclick="location.href='/restaurants'">
+            <p>Check out our restaurants</p>
+        </button>
+    </div>
 
     <div class="container">
         <% if(error && error.length > 0){ %>
@@ -11,12 +16,12 @@
                 <%= error %>
             </div>
         <% } %>
+
         <% if(success && success.length > 0){ %>
             <div class="alert alert-success" role="alert">
                 <%= success %>
             </div>
         <% } %>
     </div>
-
-</div>
+</div> <!-- Main Container -->
 <% include ./partials/footer %>

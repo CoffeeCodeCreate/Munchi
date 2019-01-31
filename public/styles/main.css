@@ -1,9 +1,83 @@
-#landingContainer
-{
-    background-image: url('../assets/gravel.png');
-}
-
 body
 {
+    height: 100vh;
+    width: 100vw;
     background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: border-box;
+    font-family: Helvetica, sans-serif;
+}
+
+#landingContainer
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('../assets/bread-bun-burger-1639562.jpg');
+    background-size: cover;
+    height: inherit;
+    width: inherit;
+    z-index: 1;
+}
+
+#overlay
+{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    
+}
+
+#headerContainer
+{
+    color: #ffffff;
+    text-align: center;
+    z-index: 3;
+    
+}
+
+
+#headerContainer h1{
+    padding: 0;
+    margin: 0;
+    font-weight: lighter;
+}
+
+
+#headerContainer h1#firstLandingHeader
+{
+    font-size: 72px;
+}
+
+#headerContainer h1#secondLandingHeader
+{
+    font-size: 144px;
+}
+
+#landingContainer button
+{
+    border: solid 1px #CC0000;
+    background-color: #CC0000;
+    width: 300px;
+    height: 77px;
+    border-radius: 5px;
+    font-size: 20px;
+    z-index: 6;
+}
+
+#landingContainer button p
+{
+    color: #ffffff;
 }
