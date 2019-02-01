@@ -1,12 +1,18 @@
-body
+/*LANDING PAGE STYLES*/
+*
 {
-    height: 100vh;
-    width: 100vw;
-    background-color: #ffffff;
     margin: 0;
     padding: 0;
-    display: border-box;
+}
+
+html,body
+{
+    height: 100%;
+    width: 100%;
+    background-color: #fafafa;
+    margin: 0;
     font-family: Helvetica, sans-serif;
+    color:#212121;
 }
 
 #landingContainer
@@ -29,8 +35,8 @@ body
 #overlay
 {
     position: fixed;
-    height: 100%;
-    width: 100%;
+    height: inherit;
+    width: inherit;
     top: 0;
     left: 0;
     right: 0;
@@ -66,18 +72,142 @@ body
     font-size: 144px;
 }
 
-#landingContainer button
+button.baseButton
 {
-    border: solid 1px #CC0000;
-    background-color: #CC0000;
+    border: none;
+    background-color: #0099CC;
     width: 300px;
-    height: 77px;
+    height: 67px;
     border-radius: 5px;
     font-size: 20px;
     z-index: 6;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 #landingContainer button p
 {
     color: #ffffff;
+}
+
+/*MAIN PAGE STYLES*/
+
+/*NAV BAR*/
+nav
+{
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    max-width: 100%;
+    background-color: #fafafa;
+}
+
+nav h1
+{
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    font-weight: lighter;
+}
+
+.account_links
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+nav ul
+{
+    padding: 0;
+    margin: 0;
+}
+
+nav li
+{
+    margin:0;
+    padding: 0;
+    display: inline-block;
+    text-decoration: none;
+    align-self: flex-end;
+    color: #212121;
+    margin-right: 10px;
+    
+}
+
+nav li a 
+{
+    text-decoration: none;
+    color:#0099CC;
+}
+
+#nav-burger
+{
+    height: 50px;
+    width: 50px;
+    padding: 0;
+}
+
+
+/* INDEX PAGE STYLES */
+
+#indexContainer
+{
+    background-image: url("../assets/index-bg2.jpeg");
+    background-size: cover;
+    padding: 0;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#indexContainer *
+{
+    padding: 10px 0;
+}
+
+
+#indexContainer img
+{
+    height: 175px;
+    width: 149px;
+}
+
+#indexContainer h1
+{
+    font-size: 72px;
+}
+
+#indexContainer h2
+{
+    font-size: 20px;
+}
+
+#indexButton
+{
+    height: 50px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#indexOverlay
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fafafa;
+    
 }

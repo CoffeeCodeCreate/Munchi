@@ -6,17 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Munchi</title>
     <link rel="stylesheet" href="/styles/main.css" type="text/css">
+    <link rel="shortcut icon" href="/assets/taco.png" type="image/png">
 </head>
 <body>
-    <div id="nav">
+    <nav>
+        <h1>Munchi</h1>
+        <img id="nav-burger" src="/assets/taco.png"/>
         <% if(!currentUser){ %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Sign Up</a></li>
+            <ul class="account_links">
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Sign Up</a></li>
+            </ul>
         <% } else { %>
-            <li><a href="#">Signed In As <%= currentUser.username %></a></li>
-            <li><a href="/logout">Logout</a></li>
+            <ul class="account_links">
+                <li><a href="#">Signed In As <%= currentUser.username %></a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
         <% } %>
-    </div>
+        </nav>
 
     <% if(error && error.length > 0){ %> <!-- checks if error exists AND checks to see if the error array's length is greater than one -->
     <div class="container">
