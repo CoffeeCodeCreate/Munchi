@@ -83,6 +83,7 @@ button.baseButton
     z-index: 6;
     margin-top: 10px;
     cursor: pointer;
+    color: #ffffff;
 }
 
 button.baseButton:hover
@@ -305,3 +306,68 @@ a:hover
     color: #0099CC;
 }
 
+.userAccountForm
+{
+    display :flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bbdefb;
+    height: inherit;
+}
+
+.userAccountForm h1
+{
+    font-weight: lighter;
+    color: #929fba ;
+    margin: 30px 0;
+}
+ 
+.userAccountForm form
+{
+    padding: 10px;
+    background-color: #ffffff;
+    height: 600px;
+    display :flex;
+    flex-direction: column;
+    width: 490px;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.26);
+    position: relative;
+}
+
+.userAccountForm form input
+{
+    height: 50px;
+    width: 90%; 
+    margin: 0 auto;
+    font-size: 20px;    
+    border: none;
+    color: #d0d6e2 ;
+    border-bottom: solid 3px #d0d6e2;
+    margin-bottom: 60px;
+}
+
+.userAccountForm form input:focus
+{
+    border-bottom: solid 3px #0099CC;
+}
+
+.userAccountForm form input:hover
+{
+    border-bottom: solid 3px #0099CC;
+}
+
+.userAccountForm form button
+{
+      position: absolute;
+      bottom: 45px;
+      left: 50%;
+      transform: translate(-50%);
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    outline: none;
+}
