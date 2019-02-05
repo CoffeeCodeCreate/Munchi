@@ -1,36 +1,46 @@
 <% include ../partials/header %>
 
 <% console.log('From the show page: ' + currentUser) %>
+<div id="showPageContainer">
+    <div class="restaurantContainer">
+        <div id="showRestaurantHeader">
+                <h1><%= restaurant.name %></h1>
+        </div>
+            <img src="<%= restaurant.image %>" >
+            <div class="restaurantDescription">
+                <h3> Specialty: <%= restaurant.specialty %> </h3>
+                <h3>Description: <%= restaurant.description %></h3>
+            </div>
+        
+            <% if(currentUser && restaurant.author.id.equals(currentUser._id)){ %>
+                <a class="btn btn-xs btn-warning" href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
+                <form id="delete-form" action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-xs btn-danger">Delete</button>
+                </form>
+            <% }%>
+            <div class="interactionContainer">
+                <a href="/restaurants/<%= restaurant._id %>/comments/new"><i class="far fa-comment"></i> COMMENT</a>
+            </div>
+    </div>
+    <button class="baseButton commentButton">Load Comments</button>
+    
 
-    <h1><%= restaurant.name %></h1>
-    <img src="<%= restaurant.image %>" >
-    <h2> Specialty: <%= restaurant.specialty %> </h2>
-    <h3>Description: <%= restaurant.description %></h3>
-
-
-    <% if(currentUser && restaurant.author.id.equals(currentUser._id)){ %>
-        <a class="btn btn-xs btn-warning" href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
-        <form id="delete-form" action="/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
-            <button class="btn btn-xs btn-danger">Delete</button>
-        </form>
-    <% }%>
-
-    <a href="/restaurants/<%= restaurant._id %>/comments/new">Add a new comment</a>
-
-    <hr>
-    <% restaurant.comments.forEach(function(comment){ %>
-        <p>
-            <strong><%= comment.author.username %></strong> - <%= comment.text %>
-        </p>
-
-        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-            <a href="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>/edit">Edit</a>
-            <form id="delete-form" action="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
-                <button>Delete</button>
-            </form>
-        <% } %>
-    <% }) %>
-
+    <div class="commentsContainer">
+            <% restaurant.comments.forEach(function(comment){ %>
+            <p>
+                <strong><%= comment.author.username %></strong> - <%= comment.text %>
+            </p>
+    
+                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                    <a href="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                    <form id="delete-form" action="/restaurants/<%=restaurant._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                        <button>Delete</button>
+                    </form>
+                <% } %>
+            <% }) %>
+        </div>  
+              
+</div>
 
 
 
