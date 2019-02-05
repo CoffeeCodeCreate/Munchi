@@ -1,6 +1,5 @@
 <% include ../partials/header %>
-
-<div id="indexContainer">
+    <div id="indexContainer">
     <div id="indexOverlay">
         <h1>Start Munchin</h1>
 
@@ -12,16 +11,24 @@
     </div>
 </div>
 
+<div id="indexDynamicHalfContainer">
+    <div id="restaurantHeaderContainer">
+        <h1 id="restaurantHeader">Restaurants</h1>
+    </div>
+    <div id="restaurantContainer">
+        <% restaurants.forEach(function(restaurant){ %>
+            <div class="restaurant">
+                <img src="<%= restaurant.image %>" >
+                <div class="restaurantInfoContainer">
+                    <h1><%= restaurant.name %></h1>
+                    <!-- <h2> Specialty: <%= restaurant.specialty %> </h2> -->
+                    <h3>Description: <%= restaurant.description %></h3>
+                    <a href="/restaurants/<%=restaurant._id %>">More info</a>
+                </div>
+            </div>
 
-
-    <h1>Restaurants</h1>
-    <% restaurants.forEach(function(restaurant){ %>
-        <h1><%= restaurant.name %></h1>
-        <img src="<%= restaurant.image %>" >
-        <h2> Specialty: <%= restaurant.specialty %> </h2>
-        <h3>Description: <%= restaurant.description %></h3>
-        <a href="/restaurants/<%=restaurant._id %>">More info</a>
-
-    <% }); %>
+        <% }); %>
+    </div>
+</div>
 
 <%include ../partials/footer %>

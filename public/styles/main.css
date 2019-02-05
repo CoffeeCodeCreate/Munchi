@@ -75,7 +75,7 @@ html,body
 button.baseButton
 {
     border: none;
-    background-color: #0099CC;
+    background-color: #33b5e5;
     width: 300px;
     height: 67px;
     border-radius: 5px;
@@ -83,6 +83,11 @@ button.baseButton
     z-index: 6;
     margin-top: 10px;
     cursor: pointer;
+}
+
+button.baseButton:hover
+{
+    background-color: #0099CC;
 }
 
 #landingContainer button p
@@ -143,9 +148,13 @@ nav li
 nav li a 
 {
     text-decoration: none;
-    color:#0099CC;
+    color:#33b5e5;
 }
 
+a:hover
+{
+    color:#0099CC;
+}
 #nav-burger
 {
     height: 50px;
@@ -155,6 +164,8 @@ nav li a
 
 
 /* INDEX PAGE STYLES */
+
+
 
 #indexContainer
 {
@@ -211,3 +222,86 @@ nav li a
     color: #fafafa;
     
 }
+
+#indexDynamicHalfContainer
+{
+    background-color: #fafafa;
+}
+
+#restaurantHeaderContainer
+{
+    background-color: #fafafa;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.26);
+}
+
+
+#restaurantHeader
+{
+    font-size: 48px;
+    color: #33b5e5;
+    padding: 10px;
+    text-align: center;
+}
+
+#restaurantContainer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+
+.restaurant
+{
+    width: 25%;
+    margin: 8px;
+    border-radius: 4px;
+    background-color: #fafafa;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.26);
+    height: 400px;
+}
+
+.restaurant h1
+{
+    color: #212121;
+}
+
+.restaurant img
+{
+    width: 100%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.restaurantInfoContainer
+{
+    padding: 10px;  
+}
+
+.restaurantInfoContainer *
+{
+    margin-bottom: 10px;    
+}
+
+.restaurantInfoContainer h1, h3
+{
+    font-weight: lighter;
+}
+
+.restaurantInfoContainer a
+{
+    text-decoration: none;
+    position: relative;
+    top: 85px;
+    font-size: 18px;
+    color: #33b5e5;
+}
+
+.restaurantInfoContainer a:hover
+{
+    color: #0099CC;
+}
+
