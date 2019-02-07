@@ -12,7 +12,7 @@ Restaurant      = require("./models/restaurant"),
 Comment         = require("./models/comment"),
 User            = require("./models/user");
 
-// seedDB = require("./seeds");
+seedDB = require("./seeds");
 // seedDB();
 
 /**
@@ -32,8 +32,8 @@ app.set("view engine", "ejs");
 //Use the connect-flash package
 app.use(flash());
 
-//Seeds the database
-// seedDB();
+// //Seeds the database
+seedDB();
 
 /**
  * Session config for mongoose.
